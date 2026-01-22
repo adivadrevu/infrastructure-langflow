@@ -10,6 +10,9 @@ A visual drag-and-drop tool for designing and deploying AWS infrastructure using
 - **Terraform Generation**: Export infrastructure as Terraform HCL code
 - **Infrastructure Validation**: Validate your infrastructure design before deployment
 - **Multi-Environment Support**: Support for sandbox (sbx) and live (prod) environments
+- **Privacy First**: Tracking and telemetry disabled by default
+- **Clean Architecture**: Industry-standard code structure following SOLID principles
+- **Microservice-Ready**: Properly structured for microservice deployment
 
 ## Supported AWS Services
 
@@ -19,6 +22,17 @@ A visual drag-and-drop tool for designing and deploying AWS infrastructure using
 - **Security**: Security Groups, IAM Roles, IAM Policies
 - **Container Registry**: ECR Repositories
 - **Service Discovery**: AWS Cloud Map
+
+## Architecture
+
+This project follows **Clean Architecture** principles with clear separation of concerns:
+
+- **Domain Layer**: Pure business logic (no external dependencies)
+- **Application Layer**: Use cases and orchestration
+- **Infrastructure Layer**: AWS SDK adapters and external services
+- **Interface Layer**: Langflow component adapters
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/STRUCTURE.md](docs/STRUCTURE.md) for detailed architecture documentation.
 
 ## Installation
 
@@ -49,14 +63,21 @@ uv pip install -r requirements.txt
 - Our components only require: `langflow`, `boto3`, `pydantic` (and `jinja2` optionally)
 - The large dependency tree comes from Langflow's optional features, not our code
 
-3. **Set up environment variables:**
+3. **Set up environment variables (optional):**
 ```bash
 cp .env.example .env
 # Edit .env and set LANGFLOW_COMPONENTS_PATH
+# Note: Privacy settings (DO_NOT_TRACK) are already configured in start-langflow.sh
 ```
 
-4. **Start Langflow with custom components:**
+4. **Start Langflow (recommended - includes privacy protection):**
 ```bash
+./start-langflow.sh
+```
+
+Or manually:
+```bash
+export DO_NOT_TRACK=true
 langflow run --components-path ./components
 ```
 
@@ -65,7 +86,7 @@ Open your browser to `http://localhost:7860`
 
 ## Quick Start Guide
 
-**New to Langflow?** See the detailed [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) for step-by-step instructions.
+**New to Langflow?** See the detailed [docs/WORKFLOW_GUIDE.md](docs/WORKFLOW_GUIDE.md) for step-by-step instructions.
 
 ### Quick Steps:
 1. Open `http://localhost:7860` in your browser
@@ -231,15 +252,26 @@ Open your browser to `http://localhost:7860`
 
 ```
 infrastructure-composer-langflow/
-├── components/
-│   ├── aws/              # AWS service components
-│   ├── deployment/        # Deployment and validation components
-│   └── utils/             # Shared utilities and models
+├── components/              # Langflow components (legacy, being migrated)
+│   ├── aws/                 # AWS service components
+│   ├── deployment/          # Deployment and validation components
+│   └── utils/               # Shared utilities and models
+├── infrastructure_composer/  # Clean architecture package
+│   ├── domain/              # Business logic layer
+│   ├── application/         # Application layer (use cases)
+│   ├── infrastructure/      # Infrastructure layer (AWS adapters)
+│   └── interfaces/          # Interface layer (Langflow adapters)
+├── docs/                    # Documentation
+│   ├── ARCHITECTURE.md
+│   ├── SETUP.md
+│   ├── WORKFLOW_GUIDE.md
+│   └── ... (other docs)
 ├── requirements.txt
 ├── README.md
-├── SETUP.md
 └── .env.example
 ```
+
+See [docs/STRUCTURE.md](docs/STRUCTURE.md) for detailed structure documentation.
 
 ## Security Notes
 
