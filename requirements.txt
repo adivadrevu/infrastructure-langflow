@@ -1,0 +1,19 @@
+# Langflow Infrastructure Composer Dependencies
+# 
+# NOTE: langflow will install 500+ packages as it includes many optional integrations
+# (LLM providers, vector databases, etc.). This is expected behavior for the full
+# Langflow framework. If you need a minimal setup, consider using only the core
+# components without the full Langflow UI.
+
+# Core Framework (required for Component classes and Langflow UI)
+langflow>=1.0.0
+
+# AWS SDK (required for AWS operations)
+boto3>=1.34.0
+# botocore is automatically installed with boto3
+
+# Data Validation (required for Pydantic models)
+pydantic>=2.0.0
+
+# Template Engine (optional, for advanced Terraform generation)
+# jinja2>=3.1.0  # Usually included with langflow, uncomment if needed
