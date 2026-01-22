@@ -95,7 +95,7 @@ class AWSDeployerComponent(Component):
             )
             
             self.status = f"✓ Deployment orchestration completed for {self.environment} environment"
-            return Data(result.dict(by_alias=True))
+            return Data(data=result.dict(by_alias=True))
             
         except Exception as e:
             error_msg = f"Deployment error: {str(e)}"
@@ -108,4 +108,4 @@ class AWSDeployerComponent(Component):
                     message=error_msg
                 )]
             )
-            return Data(result.dict(by_alias=True))
+            return Data(data=result.dict(by_alias=True))

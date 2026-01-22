@@ -114,7 +114,7 @@ class ECSClusterComponent(Component):
             }
             
             self.status = f"✓ ECS Cluster '{cluster_name}' created successfully (ARN: {cluster_arn})"
-            return Data(result)
+            return Data(data=result)
             
         except ClientError as e:
             error_code = e.response.get('Error', {}).get('Code', '')
@@ -135,27 +135,27 @@ class ECSClusterComponent(Component):
                             'status': 'exists'
                         }
                         self.status = f"ℹ ECS Cluster '{self.name}' already exists"
-                        return Data(result)
+                        return Data(data=result)
                 except:
                     pass
             
             error_msg = f"AWS Error: {error_msg}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except json.JSONDecodeError as e:
             error_msg = f"JSON Parse Error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except Exception as e:
             error_msg = f"Unexpected error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })

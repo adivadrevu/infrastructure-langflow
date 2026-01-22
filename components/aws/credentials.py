@@ -5,7 +5,7 @@ Langflow component for inputting and validating AWS credentials.
 
 from typing import Optional
 from lfx.custom.custom_component.component import Component
-from lfx.io import StrInput, Output
+from lfx.io import StrInput, SecretStrInput, Output
 from lfx.schema import Data
 from ..utils.models import AWSCredentials
 from ..utils.aws_client import validate_credentials
@@ -30,15 +30,13 @@ class AWSCredentialsComponent(Component):
             name="access_key_id",
             display_name="Access Key ID",
             info="AWS Access Key ID",
-            required=True,
-            password=False
+            required=True
         ),
-        StrInput(
+        SecretStrInput(
             name="secret_access_key",
             display_name="Secret Access Key",
             info="AWS Secret Access Key",
-            required=True,
-            password=True
+            required=True
         ),
         StrInput(
             name="region",
@@ -51,8 +49,7 @@ class AWSCredentialsComponent(Component):
             name="session_token",
             display_name="Session Token (Optional)",
             info="Temporary session token (for temporary credentials)",
-            required=False,
-            password=False
+            required=False
         ),
     ]
     
@@ -71,7 +68,7 @@ class AWSCredentialsComponent(Component):
         )
         
         self.status = f"Credentials configured for region: {self.region}"
-        return Data(credentials.dict(by_alias=True))
+        return Data(data=credentials.dict(by_alias=True))
     
     def build_validation(self) -> Data:
         """Validate credentials and return validation result."""
@@ -89,4 +86,4 @@ class AWSCredentialsComponent(Component):
         else:
             self.status = f"✗ Credentials invalid: {validation.get('error', 'Unknown error')}"
         
-        return Data(validation)
+        return Data(data=validation)

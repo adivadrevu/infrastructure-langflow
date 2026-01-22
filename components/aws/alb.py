@@ -223,28 +223,28 @@ class ALBComponent(Component):
             }
             
             self.status = f"✓ ALB '{self.name}' created successfully (DNS: {lb_dns})"
-            return Data(result)
+            return Data(data=result)
             
         except ClientError as e:
             error_code = e.response.get('Error', {}).get('Code', '')
             error_msg = e.response.get('Error', {}).get('Message', str(e))
             error_msg = f"AWS Error: {error_msg}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except json.JSONDecodeError as e:
             error_msg = f"JSON Parse Error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except Exception as e:
             error_msg = f"Unexpected error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })

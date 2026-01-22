@@ -93,12 +93,12 @@ provider "aws" {{
             terraform += self._generate_resources(infra_data, suffix)
             
             self.status = f"✓ Terraform code generated for {self.environment} environment"
-            return Data({'code': terraform, 'filename': 'main.tf'})
+            return Data(data={'code': terraform, 'filename': 'main.tf'})
             
         except Exception as e:
             error_msg = f"Error generating Terraform: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({'error': error_msg})
+            return Data(data={'error': error_msg})
     
     def build_variables(self) -> Data:
         """Generate variables.tf file."""
@@ -122,7 +122,7 @@ variable "project_name" {
   default     = "infrastructure"
 }
 """
-        return Data({'code': variables, 'filename': 'variables.tf'})
+        return Data(data={'code': variables, 'filename': 'variables.tf'})
     
     def build_outputs(self) -> Data:
         """Generate outputs.tf file."""
@@ -138,7 +138,7 @@ output "environment" {{
   value       = "{self.environment}"
 }}
 """
-        return Data({'code': outputs, 'filename': 'outputs.tf'})
+        return Data(data={'code': outputs, 'filename': 'outputs.tf'})
     
     def build_readme(self) -> Data:
         """Generate README.md file."""
@@ -184,7 +184,7 @@ This configuration includes:
 - Environment suffix: `{self.environment}`
 - Make sure to review and customize the configuration before applying
 """
-        return Data({'code': readme, 'filename': 'README.md'})
+        return Data(data={'code': readme, 'filename': 'README.md'})
     
     def _generate_resources(self, infra_data: Dict[str, Any], suffix: str) -> str:
         """Generate Terraform resources from infrastructure data."""

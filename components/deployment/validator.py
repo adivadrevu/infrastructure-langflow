@@ -57,7 +57,7 @@ class ValidatorComponent(Component):
                     'node_id': None
                 })
                 self.status = "✗ Validation failed: Empty infrastructure"
-                return Data({
+                return Data(data={
                     'is_valid': False,
                     'errors': errors,
                     'warnings': warnings
@@ -107,7 +107,7 @@ class ValidatorComponent(Component):
             else:
                 self.status = f"✗ Validation failed: {len(errors)} errors, {len(warnings)} warnings"
             
-            return Data({
+            return Data(data={
                 'is_valid': is_valid,
                 'errors': errors,
                 'warnings': warnings
@@ -116,7 +116,7 @@ class ValidatorComponent(Component):
         except Exception as e:
             error_msg = f"Validation error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'is_valid': False,
                 'errors': [{
                     'severity': 'error',

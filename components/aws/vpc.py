@@ -238,26 +238,26 @@ class VPCComponent(Component):
             }
             
             self.status = f"✓ VPC '{self.name}' created successfully (ID: {vpc_id})"
-            return Data(result)
+            return Data(data=result)
             
         except ClientError as e:
             error_msg = f"AWS Error: {e.response.get('Error', {}).get('Message', str(e))}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except json.JSONDecodeError as e:
             error_msg = f"JSON Parse Error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
         except Exception as e:
             error_msg = f"Unexpected error: {str(e)}"
             self.status = f"✗ {error_msg}"
-            return Data({
+            return Data(data={
                 'error': error_msg,
                 'status': 'failed'
             })
