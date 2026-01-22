@@ -8,7 +8,14 @@ from typing import Optional, Dict, Any, List
 from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, DataInput, DropdownInput, Output
 from lfx.schema import Data
-from ..utils.models import AWSCredentials, DeploymentResult, DeployedResource, DeploymentError
+try:
+    from ..utils.models import AWSCredentials, DeploymentResult, DeployedResource, DeploymentError
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials, DeploymentResult, DeployedResource, DeploymentError
 
 
 class AWSDeployerComponent(Component):
@@ -21,7 +28,7 @@ class AWSDeployerComponent(Component):
     display_name: str = "AWS Deployer"
     description: str = "Orchestrate AWS resource deployment with dependency ordering"
     documentation: str = "https://docs.aws.amazon.com/"
-    icon: str = "Rocket"
+    icon: str = "rocket"
     priority: int = 45
     name: str = "aws_deployer"
     

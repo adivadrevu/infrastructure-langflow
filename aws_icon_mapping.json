@@ -1,0 +1,37 @@
+{
+  "VPC": {
+    "relative_path": "networking_content_delivery/vpc/service_icon.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/networking_content_delivery/vpc/service_icon.svg",
+    "exists": true
+  },
+  "ECS Cluster": {
+    "relative_path": "containers/ecs/service.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/containers/ecs/service.svg",
+    "exists": true
+  },
+  "ALB": {
+    "relative_path": "networking_content_delivery/elastic_load_balancing/service_icon.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/networking_content_delivery/elastic_load_balancing/service_icon.svg",
+    "exists": true
+  },
+  "ECR": {
+    "relative_path": "containers/ecr/service_icon.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/containers/ecr/service_icon.svg",
+    "exists": true
+  },
+  "IAM Role": {
+    "relative_path": "security_identity_compliance/iam/role.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/security_identity_compliance/iam/role.svg",
+    "exists": true
+  },
+  "Security Group": {
+    "relative_path": "compute/ec2/service_icon.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/compute/ec2/service_icon.svg",
+    "exists": true
+  },
+  "Service Discovery": {
+    "relative_path": "containers/ecs/service.svg",
+    "absolute_path": "/tmp/jsii-kernel-VacW3x/node_modules/@aws/pdk/assets/aws-arch/containers/ecs/service.svg",
+    "exists": true
+  }
+}

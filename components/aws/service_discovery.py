@@ -9,8 +9,22 @@ from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, DataInput, Output
 from lfx.schema import Data
 from botocore.exceptions import ClientError
-from ..utils.models import AWSCredentials
-from ..utils.aws_client import create_servicediscovery_client
+try:
+    from ..utils.models import AWSCredentials
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials
+try:
+    from ..utils.aws_client import create_servicediscovery_client
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.aws_client import create_servicediscovery_client
 
 
 class ServiceDiscoveryComponent(Component):
@@ -22,7 +36,7 @@ class ServiceDiscoveryComponent(Component):
     display_name: str = "Service Discovery"
     description: str = "Create AWS Service Discovery (Cloud Map) service"
     documentation: str = "https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html"
-    icon: str = "Network"
+    icon: str = "compass"
     priority: int = 55
     name: str = "service_discovery"
     

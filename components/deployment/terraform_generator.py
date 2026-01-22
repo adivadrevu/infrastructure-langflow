@@ -19,7 +19,7 @@ class TerraformGeneratorComponent(Component):
     display_name: str = "Terraform Generator"
     description: str = "Generate Terraform HCL code from infrastructure components"
     documentation: str = "https://www.terraform.io/docs"
-    icon: str = "Code"
+    icon: str = "code"
     priority: int = 50
     name: str = "terraform_generator"
     

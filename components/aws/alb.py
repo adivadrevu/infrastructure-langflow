@@ -9,8 +9,22 @@ from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, IntInput, DataInput, DropdownInput, Output
 from lfx.schema import Data
 from botocore.exceptions import ClientError
-from ..utils.models import AWSCredentials
-from ..utils.aws_client import create_elbv2_client
+try:
+    from ..utils.models import AWSCredentials
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials
+try:
+    from ..utils.aws_client import create_elbv2_client
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.aws_client import create_elbv2_client
 
 
 class ALBComponent(Component):
@@ -22,7 +36,7 @@ class ALBComponent(Component):
     display_name: str = "Application Load Balancer"
     description: str = "Create AWS Application Load Balancer (ALB) with listeners and target groups"
     documentation: str = "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html"
-    icon: str = "LoadBalancer"
+    icon: str = "scale"
     priority: int = 75
     name: str = "alb"
     

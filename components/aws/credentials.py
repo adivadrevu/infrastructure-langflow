@@ -7,8 +7,20 @@ from typing import Optional
 from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, SecretStrInput, Output
 from lfx.schema import Data
-from ..utils.models import AWSCredentials
-from ..utils.aws_client import validate_credentials
+
+# Handle imports for both direct import (Langflow) and package import
+try:
+    from ..utils.models import AWSCredentials
+    from ..utils.aws_client import validate_credentials
+except ImportError:
+    # Fallback for direct import from components path
+    import sys
+    import os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials
+    from utils.aws_client import validate_credentials
 
 
 class AWSCredentialsComponent(Component):
@@ -21,7 +33,7 @@ class AWSCredentialsComponent(Component):
     display_name: str = "AWS Credentials"
     description: str = "Input and validate AWS credentials (Access Key ID, Secret Access Key, Region)"
     documentation: str = "https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html"
-    icon: str = "AWS"
+    icon: str = "key-round"
     priority: int = 100
     name: str = "aws_credentials"
     

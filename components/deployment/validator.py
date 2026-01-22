@@ -20,7 +20,7 @@ class ValidatorComponent(Component):
     display_name: str = "Infrastructure Validator"
     description: str = "Validate infrastructure design for errors and warnings"
     documentation: str = "https://docs.aws.amazon.com/"
-    icon: str = "CheckCircle"
+    icon: str = "check-circle"
     priority: int = 40
     name: str = "validator"
     

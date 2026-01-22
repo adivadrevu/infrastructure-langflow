@@ -9,8 +9,22 @@ from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, IntInput, DataInput, DropdownInput, Output
 from lfx.schema import Data
 from botocore.exceptions import ClientError
-from ..utils.models import AWSCredentials
-from ..utils.aws_client import create_ecs_client
+try:
+    from ..utils.models import AWSCredentials
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials
+try:
+    from ..utils.aws_client import create_ecs_client
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.aws_client import create_ecs_client
 
 
 class ECSServiceComponent(Component):
@@ -22,7 +36,7 @@ class ECSServiceComponent(Component):
     display_name: str = "ECS Service"
     description: str = "Create AWS ECS Service with Task Definition"
     documentation: str = "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html"
-    icon: str = "Container"
+    icon: str = "container"
     priority: int = 80
     name: str = "ecs_service"
     

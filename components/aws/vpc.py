@@ -9,8 +9,22 @@ from lfx.custom.custom_component.component import Component
 from lfx.io import StrInput, BoolInput, DataInput, Output
 from lfx.schema import Data
 from botocore.exceptions import ClientError
-from ..utils.models import AWSCredentials, VPCConfig
-from ..utils.aws_client import create_ec2_client
+try:
+    from ..utils.models import AWSCredentials, VPCConfig
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.models import AWSCredentials, VPCConfig
+try:
+    from ..utils.aws_client import create_ec2_client
+except ImportError:
+    import sys, os
+    components_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if components_dir not in sys.path:
+        sys.path.insert(0, components_dir)
+    from utils.aws_client import create_ec2_client
 
 
 class VPCComponent(Component):
@@ -22,7 +36,7 @@ class VPCComponent(Component):
     display_name: str = "VPC"
     description: str = "Create AWS VPC (Virtual Private Cloud) with subnets, Internet Gateway, NAT Gateways, and Route Tables"
     documentation: str = "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
-    icon: str = "Network"
+    icon: str = "network"
     priority: int = 90
     name: str = "vpc"
     
